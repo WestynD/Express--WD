@@ -3,22 +3,34 @@ const PORT = 3000
 const db = require('./db.json')
 
 const express = require('express')
+const logger = require('morgan')
 
 const app = express()
 
-//========  load middleward ============
+//========  load middleware ============
+//external
+app.use(logger('dev'))
+//bodyparse
+//helmet
+
+//internal
+app.use(express.static('public'))
 
 //REST calls
 //Create
-//'/logs?courseid=cs4690&uvuid=101111111
-// app.post('/user', (req, res) => {
-//   console.log('Creating new log') // TODO: fill in path and make function
-// })
+//'/logs?courseId=cs4690&uvuId=101111111
+app.post('/user', (req, res) => {
+  console.log('Creating new log') // TODO: fill in path and make function
+  // change db - memory
+  //write to file - persistent
+  //return id
+  // TODO agter getting post to work correctly here change to put here and on client
+})
 
 //Read // /api/v1/logs?courseId=cs4690&uvuId=10111111
 app.get('/api/v1/logs', (req, res) => {
-  const courseId = req.params('courseId')
-  const uvuId = req.params('uvuId')
+  const courseId = req.param('courseId')
+  const uvuId = req.param('uvuId')
   //res.send(`Get logs ${courseId} ${uvuId}`)
   // get data from JSON
   // filter for what I need
