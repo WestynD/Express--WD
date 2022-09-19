@@ -61,13 +61,15 @@ app.get('*', (req, res) => {
   res.send('File not found hoser')
 })
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`App listening on Port ${PORT}`)
 })
 
-function gracefulShutdown(){
+function gracefulShutdown() {
   // Clean up and prepare to die
-  server.close(() => {console.log('Server is really down')})
+  server.close(() => {
+    console.log('Server is really down')
+  })
 }
 
 process.on('SIGINT', gracefulShutdown)
