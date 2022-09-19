@@ -1,9 +1,10 @@
 console.log('Loading Server')
-const PORT = 3000
-const db = require('./db.json')
-
 const express = require('express')
 const logger = require('morgan')
+const helmet = require('helmet')
+
+const PORT = 3000
+const db = require('./db.json')
 
 const app = express()
 
@@ -15,6 +16,8 @@ app.use(logger('dev'))
 
 //internal
 app.use(express.static('public'))
+
+app.use(helmet())
 
 //REST calls
 //Create
