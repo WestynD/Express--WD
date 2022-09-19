@@ -55,6 +55,19 @@ app.get('/api/v1/logs', (req, res) => {
 //   res.send('Getting all logs') // TODO: fill in path and make function
 // })
 
-app.listen(PORT, () => {
-  console.log(`Example app listening on Port ${PORT}`)
+//404 page
+app.get('*', (req, res) => {
+  //* means wild card
+  res.send('File not found hoser')
 })
+
+app.listen(PORT, () => {
+  console.log(`App listening on Port ${PORT}`)
+})
+
+function gracefulShutdown(){
+  // Clean up and prepare to die
+  server.close(() => {console.log('Server is really down')})
+}
+
+process.on('SIGINT', gracefulShutdown)
